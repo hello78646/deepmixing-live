@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d0a16">
+  <meta name="description" content="Deepmixing 全民混音。挑两段音乐，听它们接在一起。不登录，不上传。">
+  <title>Deepmixing · 全民混音</title>
+  <link rel="icon" href="mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="bar">
+    <a class="wordmark" href="./"><img src="mark.svg" alt="" width="33" height="33">Deepmixing</a>
+    <span class="badge"><i></i> 浏览器试混版</span>
+  </header>
+  <main>
+    <section class="hero" aria-labelledby="headline">
+      <div class="planet" aria-hidden="true"><img src="mark.svg" alt="" width="78" height="78"></div>
+      <p class="kicker">全 民 混 音</p>
+      <h1 id="headline">挑两首，<em>接着听。</em></h1>
+      <p>选好两段，调一下交接，听听它们接在一起是什么样。</p>
+    </section>
+    <section class="console" aria-label="双轨试混工作台">
+      <div class="console-head"><h2>双轨试混</h2><button type="button" id="demo" class="quiet">用示例先试</button></div>
+      <div class="decks">
+        <section class="deck" data-deck="0" aria-labelledby="title-a"><div class="deck-head"><span class="letter">A</span><h3 id="title-a">先播这段</h3></div>
+          <label class="pick"><input type="file" accept="audio/*,.wav,.mp3,.m4a,.flac,.ogg,.aac,.opus,.aiff" aria-label="选择第一段音频"><span class="name">选择第一段音频</span><span class="file-action" aria-hidden="true">＋</span></label>
+          <div class="trim" hidden><label>起点（秒）<input class="start" type="number" min="0" step="any" value="0"></label><label>终点（秒）<input class="end" type="number" min="0" step="any" value="0"></label></div>
+          <p class="track-note">MP3、WAV 或浏览器支持的音频格式</p>
+        </section>
+        <section class="deck deck-b" data-deck="1" aria-labelledby="title-b"><div class="deck-head"><span class="letter">B</span><h3 id="title-b">接到这段</h3></div>
+          <label class="pick"><input type="file" accept="audio/*,.wav,.mp3,.m4a,.flac,.ogg,.aac,.opus,.aiff" aria-label="选择第二段音频"><span class="name">选择第二段音频</span><span class="file-action" aria-hidden="true">＋</span></label>
+          <div class="trim" hidden><label>起点（秒）<input class="start" type="number" min="0" step="any" value="0"></label><label>终点（秒）<input class="end" type="number" min="0" step="any" value="0"></label></div>
+          <p class="track-note">MP3、WAV 或浏览器支持的音频格式</p>
+        </section>
+      </div>
+      <div class="transition"><div class="range-head"><label for="fade">交叉淡化</label><output id="fade-value" for="fade">3 秒</output></div><input id="fade" type="range" min="0.5" max="12" step="0.5" value="3"><div class="range-labels"><span>短一点</span><span>慢慢接</span></div></div>
+      <div class="actions"><button type="button" id="mix" class="primary" disabled>生成试听</button><a class="download" id="download" download="deepmixing-mix.wav" hidden>下载 WAV ↓</a></div>
+      <p id="status" class="status" role="status" aria-live="polite">选好两段音频，或先用示例听听。</p>
+      <section id="result" class="result" aria-label="混音试听" hidden><audio controls preload="metadata" id="player" aria-label="播放混音成品"></audio></section>
+      <noscript>请开启 JavaScript，再使用试混工作台。</noscript>
+    </section>
+    <footer><p>无需登录 · 音频只在当前设备处理 · 每个文件上限 35 MiB</p><p>试混版仅支持双轨交叉淡化与 WAV 导出，不含 Agent、分轨或自动对拍。请使用你有权处理的音频。</p></footer>
+  </main>
+</body>
+</html>
