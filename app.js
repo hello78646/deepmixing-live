@@ -116,3 +116,41 @@ mix.addEventListener('click', async () => {
   finally { busy = false; setControls(); }
 });
 player.addEventListener('error', () => { if (outputUrl) showStatus('浏览器不能播放此音频，可下载 WAV 后试听。', true); });
+
+// Enable only when the release includes a cleared, prerecorded opening clip.
+const openingButton = $('opening-voice');
+if (openingButton?.dataset.src) {
+  const opening = new Audio(openingButton.dataset.src);
+  let attempt = 0, active = false;
+  function stopOpening() {
+    attempt++;
+    active = false;
+    opening.pause();
+    if (!openingButton.disabled) openingButton.textContent = '播放零氪开场';
+  }
+  async function playOpening() {
+    const current = ++attempt;
+    active = true;
+    openingButton.textContent = '停止开场语音';
+    try {
+      opening.currentTime = 0;
+      await opening.play();
+    } catch (error) {
+      if (current !== attempt) return;
+      stopOpening();
+      if (error.name !== 'NotAllowedError') {
+        openingButton.textContent = '开场语音暂不可用';
+        openingButton.disabled = true;
+      }
+    }
+  }
+  opening.addEventListener('ended', stopOpening);
+  openingButton.addEventListener('click', () => {
+    if (active) stopOpening();
+    else { player.pause(); void playOpening(); }
+  });
+  player.addEventListener('play', stopOpening);
+  window.addEventListener('pagehide', stopOpening);
+  openingButton.hidden = false;
+  void playOpening();
+}
