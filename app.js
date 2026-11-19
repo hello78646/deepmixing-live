@@ -151,6 +151,6 @@ if (openingButton?.dataset.src) {
   });
   player.addEventListener('play', stopOpening);
   window.addEventListener('pagehide', stopOpening);
-  openingButton.hidden = false;
+  $('opening-voice-panel').hidden = false;
   void playOpening();
 }

@@ -21,7 +21,10 @@
       <p class="kicker">全 民 混 音</p>
       <h1 id="headline">挑两首，<em>接着听。</em></h1>
       <p>选好两段，调一下交接，听听它们接在一起是什么样。</p>
-      <button type="button" id="opening-voice" class="quiet opening-voice" data-src="" hidden>播放零氪开场</button>
+      <div class="opening-voice" id="opening-voice-panel" hidden>
+        <button type="button" id="opening-voice" class="quiet" data-src="./lingke-opening-v1.mp3" aria-describedby="opening-voice-label">播放零氪开场</button>
+        <span class="opening-voice-label" id="opening-voice-label">AI 合成语音</span>
+      </div>
     </section>
     <section class="console" aria-label="双轨试混工作台">
       <div class="console-head"><h2>双轨试混</h2><button type="button" id="demo" class="quiet">用示例先试</button></div>
